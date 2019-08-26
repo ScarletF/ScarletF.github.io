@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="ScarletF的小茅庐">
 <meta property="og:description" content="在传输速度有限制的情况下，快速压缩大文件能大大提升效率，为下一步的分析工作赢得时间">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-05-09T15:40:49.564Z">
+<meta property="og:updated_time" content="2019-08-26T14:05:49.266Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="快速打包系统文件">
 <meta name="twitter:description" content="在传输速度有限制的情况下，快速压缩大文件能大大提升效率，为下一步的分析工作赢得时间">
@@ -373,12 +373,12 @@
 
       
         <p>在传输速度有限制的情况下，快速压缩大文件能大大提升效率，为下一步的分析工作赢得时间<br><a id="more"></a></p>
-<h2 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h2><h3 id="7z"><a href="#7z" class="headerlink" title="7z"></a>7z</h3><p>支持格式：7z，ZIP，XZ，BZIP2，GZIP，TAR</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> a	添加压缩文件</span><br><span class="line">-t	压缩类型，如 -tzip</span><br><span class="line">-r	递归压缩</span><br><span class="line">-p	指定密码，如 -p123456</span><br><span class="line">-v	分卷压缩，单位 b|k|m|g</span><br></pre></td></tr></table></figure>
+<h2 id="一、Windows"><a href="#一、Windows" class="headerlink" title="一、Windows"></a>一、Windows</h2><h3 id="1-7z"><a href="#1-7z" class="headerlink" title="1. 7z"></a>1. 7z</h3><p>支持格式：7z，ZIP，XZ，BZIP2，GZIP，TAR</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> a	文件名</span><br><span class="line">-t	压缩类型，如 -tzip，默认 7z</span><br><span class="line">-r	递归压缩</span><br><span class="line">-p	指定密码，如 -p123456</span><br><span class="line">-v	分卷压缩，单位 b|k|m|g</span><br></pre></td></tr></table></figure>
 <h4 id="普通压缩"><a href="#普通压缩" class="headerlink" title="普通压缩"></a>普通压缩</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 单个文件</span><br><span class="line">7z.exe a filename.7z -p123456 filename.txt</span><br><span class="line"># 递归压缩文件夹</span><br><span class="line">7z.exe a filename.7z -p123456 -r dir_path</span><br></pre></td></tr></table></figure>
 <h4 id="分卷压缩"><a href="#分卷压缩" class="headerlink" title="分卷压缩"></a>分卷压缩</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">7z.exe a filename.7z -p123456 -v100m filename.txt</span><br></pre></td></tr></table></figure>
-<h3 id="winRAR"><a href="#winRAR" class="headerlink" title="winRAR"></a>winRAR</h3><p>提取 winRAR 安装目录中的 rar.exe 即可使用</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">-a	添加要压缩的文件</span><br><span class="line">-p	指定压缩密码</span><br><span class="line">-r	递归压缩,默认只压根目录,需要先注册下,把rarreg.key丢到安装winrar目录即可</span><br><span class="line">-v	分卷压缩，单位 b|k|m|g</span><br><span class="line">-m3	标准(默认)</span><br><span class="line">-m4	较好(较高的压缩比) </span><br><span class="line">-m5	最优(最高压缩比,速度最慢)</span><br></pre></td></tr></table></figure>
+<h3 id="2-WinRAR"><a href="#2-WinRAR" class="headerlink" title="2. WinRAR"></a>2. WinRAR</h3><p>提取 winRAR 安装目录中的 rar.exe 即可使用<br><em>注意：</em> 在 32 位系统运行完毕会报错，不懂为何</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> a	文件名  </span><br><span class="line">-a	添加要压缩的文件</span><br><span class="line">-p	指定压缩密码</span><br><span class="line">-r	递归压缩,默认只压根目录,需要先注册下,把rarreg.key丢到安装winrar目录即可</span><br><span class="line">-v	分卷压缩，单位 b|k|m|g</span><br><span class="line">-m3	标准(默认)</span><br><span class="line">-m4	较好(较高的压缩比) </span><br><span class="line">-m5	最优(最高压缩比,速度最慢)</span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 单个文件</span><br><span class="line">rar.exe a filename.rar -p123456 -m4 -a filename.txt</span><br><span class="line"># 文件夹</span><br><span class="line">rar.exe a filename.rar -p123456 -m5 -r -a dir_path</span><br><span class="line"># 分卷压缩</span><br><span class="line">rar.exe a filename.rar -p123456 -m4 -v100m -a filename.txt</span><br></pre></td></tr></table></figure>
 
       
@@ -561,7 +561,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Windows"><span class="nav-text">Windows</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#7z"><span class="nav-text">7z</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#普通压缩"><span class="nav-text">普通压缩</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分卷压缩"><span class="nav-text">分卷压缩</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#winRAR"><span class="nav-text">winRAR</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、Windows"><span class="nav-text">一、Windows</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-7z"><span class="nav-text">1. 7z</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#普通压缩"><span class="nav-text">普通压缩</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分卷压缩"><span class="nav-text">分卷压缩</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-WinRAR"><span class="nav-text">2. WinRAR</span></a></li></ol></li></ol></div>
             
 
           </div>
