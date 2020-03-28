@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="ScarletF的小茅庐">
 <meta property="og:description" content="在传输速度有限制的情况下，快速压缩大文件能大大提升效率，为下一步的分析工作赢得时间">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-26T14:05:49.266Z">
+<meta property="og:updated_time" content="2020-03-28T13:01:57.102Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="快速打包系统文件">
 <meta name="twitter:description" content="在传输速度有限制的情况下，快速压缩大文件能大大提升效率，为下一步的分析工作赢得时间">
@@ -374,12 +374,16 @@
       
         <p>在传输速度有限制的情况下，快速压缩大文件能大大提升效率，为下一步的分析工作赢得时间<br><a id="more"></a></p>
 <h2 id="一、Windows"><a href="#一、Windows" class="headerlink" title="一、Windows"></a>一、Windows</h2><h3 id="1-7z"><a href="#1-7z" class="headerlink" title="1. 7z"></a>1. 7z</h3><p>支持格式：7z，ZIP，XZ，BZIP2，GZIP，TAR</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> a	文件名</span><br><span class="line">-t	压缩类型，如 -tzip，默认 7z</span><br><span class="line">-r	递归压缩</span><br><span class="line">-p	指定密码，如 -p123456</span><br><span class="line">-v	分卷压缩，单位 b|k|m|g</span><br></pre></td></tr></table></figure>
-<h4 id="普通压缩"><a href="#普通压缩" class="headerlink" title="普通压缩"></a>普通压缩</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 单个文件</span><br><span class="line">7z.exe a filename.7z -p123456 filename.txt</span><br><span class="line"># 递归压缩文件夹</span><br><span class="line">7z.exe a filename.7z -p123456 -r dir_path</span><br></pre></td></tr></table></figure>
-<h4 id="分卷压缩"><a href="#分卷压缩" class="headerlink" title="分卷压缩"></a>分卷压缩</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">7z.exe a filename.7z -p123456 -v100m filename.txt</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"> a	压缩包名称</span><br><span class="line"> e	解压文件</span><br><span class="line">-t	压缩类型，如 -tzip，默认 7z</span><br><span class="line">-r	递归压缩</span><br><span class="line">-p	指定密码，如 -p123456</span><br><span class="line">-v	分卷压缩，单位 b|k|m|g</span><br><span class="line">-o	输出目录</span><br></pre></td></tr></table></figure>
+<h4 id="压缩"><a href="#压缩" class="headerlink" title="压缩"></a>压缩</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 单个文件</span><br><span class="line">7z.exe a filename.7z -p123456 -v100m filename.txt</span><br><span class="line"></span><br><span class="line"># 递归压缩文件夹</span><br><span class="line">7z.exe a filename.7z -p123456 -r dir_path</span><br></pre></td></tr></table></figure>
+<h4 id="解压"><a href="#解压" class="headerlink" title="解压"></a>解压</h4><p><em>注意：</em> <code>-o</code> 参数末尾最好不要以 <code>\</code> 结束</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">7z.exe -e filename.7z -p123456 -oc:\temp</span><br></pre></td></tr></table></figure>
 <h3 id="2-WinRAR"><a href="#2-WinRAR" class="headerlink" title="2. WinRAR"></a>2. WinRAR</h3><p>提取 winRAR 安装目录中的 rar.exe 即可使用<br><em>注意：</em> 在 32 位系统运行完毕会报错，不懂为何</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> a	文件名  </span><br><span class="line">-a	添加要压缩的文件</span><br><span class="line">-p	指定压缩密码</span><br><span class="line">-r	递归压缩,默认只压根目录,需要先注册下,把rarreg.key丢到安装winrar目录即可</span><br><span class="line">-v	分卷压缩，单位 b|k|m|g</span><br><span class="line">-m3	标准(默认)</span><br><span class="line">-m4	较好(较高的压缩比) </span><br><span class="line">-m5	最优(最高压缩比,速度最慢)</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 单个文件</span><br><span class="line">rar.exe a filename.rar -p123456 -m4 -a filename.txt</span><br><span class="line"># 文件夹</span><br><span class="line">rar.exe a filename.rar -p123456 -m5 -r -a dir_path</span><br><span class="line"># 分卷压缩</span><br><span class="line">rar.exe a filename.rar -p123456 -m4 -v100m -a filename.txt</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 单个文件</span><br><span class="line">rar.exe a filename.rar -p123456 -m4 -a filename.txt</span><br><span class="line"></span><br><span class="line"># 文件夹</span><br><span class="line">rar.exe a filename.rar -p123456 -m5 -r -a dir_path</span><br><span class="line"></span><br><span class="line"># 分卷压缩</span><br><span class="line">rar.exe a filename.rar -p123456 -m4 -v100m -a filename.txt</span><br></pre></td></tr></table></figure>
+<h2 id="二、Linux"><a href="#二、Linux" class="headerlink" title="二、Linux"></a>二、Linux</h2><h4 id="1-Tar"><a href="#1-Tar" class="headerlink" title="1.Tar"></a>1.Tar</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">-z 	是否同时具有gz属性</span><br><span class="line">-j 	是否同时具有bz2属性</span><br><span class="line">-J 	是否同时具有xz属性</span><br><span class="line">-c 	建立一个压缩文档</span><br><span class="line">-x 	解压缩</span><br><span class="line">-t 	查看压缩包内容</span><br><span class="line">-C 	指定输出目录</span><br><span class="line">-v 	显示压缩或者打包的内容</span><br><span class="line">-f 	文件名，-f参数在使用的时候一定排在其他参数的后面</span><br><span class="line">-p 	保留备份数据的原本权限与属性</span><br><span class="line">-P 	保留绝对路径</span><br></pre></td></tr></table></figure>
+<h4 id="压缩-1"><a href="#压缩-1" class="headerlink" title="压缩"></a>压缩</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># 普通压缩</span><br><span class="line">tar -czvf /path/file.tar.gz 123.txt</span><br><span class="line"></span><br><span class="line">&lt;# </span><br><span class="line">   分卷压缩</span><br><span class="line">   “-“号是 tar 的 ouput 和 split 的 input 的参数</span><br><span class="line">   完成后生成 file.tar.gz.aa、file.tar.gz.ab、file.tar.gz.ac </span><br><span class="line">#&gt;</span><br><span class="line">tar -czvf - file.iso|split -b 100m - file.tar.gz.</span><br><span class="line"></span><br><span class="line"># 加密压缩</span><br><span class="line">tar -czvf - file | openssl des3 -salt -k password -out /path/file.tar.gz</span><br></pre></td></tr></table></figure>
+<h4 id="解压-1"><a href="#解压-1" class="headerlink" title="解压"></a>解压</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 普通解压</span><br><span class="line">tar -xzvf /path/file.tar.gz /path</span><br><span class="line"></span><br><span class="line"># 分卷解压</span><br><span class="line">cat file.tar.gz.a* | tar xz</span><br><span class="line"></span><br><span class="line"># 解密解压</span><br><span class="line">openssl des3 -d -k password -salt -in /path/file.tar.gz | tar xzf -</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -416,8 +420,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/08/13/域渗透-Exchange邮件导出/" rel="prev" title="[域渗透]Exchange邮件导出">
-                [域渗透]Exchange邮件导出 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/09/03/域渗透-导出域用户Hash方法/" rel="prev" title="[域渗透]导出域用户Hash方法总结">
+                [域渗透]导出域用户Hash方法总结 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -505,7 +509,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -527,7 +531,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -570,7 +574,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、Windows"><span class="nav-text">一、Windows</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-7z"><span class="nav-text">1. 7z</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#普通压缩"><span class="nav-text">普通压缩</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分卷压缩"><span class="nav-text">分卷压缩</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-WinRAR"><span class="nav-text">2. WinRAR</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、Windows"><span class="nav-text">一、Windows</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-7z"><span class="nav-text">1. 7z</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#压缩"><span class="nav-text">压缩</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解压"><span class="nav-text">解压</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-WinRAR"><span class="nav-text">2. WinRAR</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、Linux"><span class="nav-text">二、Linux</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Tar"><span class="nav-text">1.Tar</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#压缩-1"><span class="nav-text">压缩</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解压-1"><span class="nav-text">解压</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -590,7 +594,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; 2019 &mdash; <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
